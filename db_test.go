@@ -18,7 +18,7 @@ func TestDatabase(t *testing.T) {
 	}
 	col2 := Column{"name", ColumnVarchar}
 	col3 := Column{"population", ColumnInt}
-	db.CreateTable("cities", []Column{
+	tab := db.CreateTable("cities", []Column{
 		col1,
 		col2,
 		col3,
@@ -26,4 +26,7 @@ func TestDatabase(t *testing.T) {
 	if diff := cmp.Diff(len(db.tables), 1); diff != "" {
 		t.Errorf("Select: (-want +got)\n%s", diff)
 	}
+	tab.Insert(1, "Tokyo", 37)
+	tab.Insert(2, "Delhi", 28)
+	tab.Insert(3, "Shanghai", 28)
 }
