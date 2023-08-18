@@ -1,20 +1,5 @@
 package main
 
-type Database struct {
-	tables map[string]Table
-}
-
-type Table struct {
-	Name    string
-	columns []Column
-	rows    [][]any
-}
-
-type Column struct {
-	Name string
-	Type int
-}
-
 func NewDatabase() *Database {
 	return &Database{
 		tables: make(map[string]Table),
@@ -29,8 +14,13 @@ func (d *Database) CreateTable(name string, cols []Column) *Table {
 }
 
 func NewTable(name string, cols []Column) Table {
+	colIdx := make(map[string]int, len(cols))
+	for i, v := range cols {
+		colIdx[v.Name] = i
+	}
 	return Table{
 		Name:    name,
 		columns: cols,
+		colIdx:  colIdx,
 	}
 }
