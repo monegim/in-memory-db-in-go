@@ -20,3 +20,17 @@ func NewDatabase() *Database {
 		tables: make(map[string]Table),
 	}
 }
+
+func (d *Database) CreateTable(name string, cols []Column) *Table {
+	t := NewTable(name, cols)
+	d.tables[t.Name] = t
+	return &t
+
+}
+
+func NewTable(name string, cols []Column) Table {
+	return Table{
+		Name:    name,
+		columns: cols,
+	}
+}
