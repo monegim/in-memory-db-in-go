@@ -19,3 +19,9 @@ type Column struct {
 type Expression struct {
 	Column string
 }
+
+type Condition struct {
+	Column string
+	Eq     string
+	Value  any
+}
